@@ -80,7 +80,12 @@ def Remove_job() :
     if user_job_choice in parent_dict_key :
     
        del data[count][user_job_choice]
-       print("Done delete the key ")
+       os.system("clear")
+       print("Removing task in progress..")
+       time.sleep(1)
+       os.system("clear")
+       print("Done delete the Task ")
+       
        with open("Jobs_information.json" , "w") as rr :
            json.dump(data , rr , indent=3)
            rr.close()
@@ -110,8 +115,64 @@ def display_Jobs() :
                     
                     
 def Update_Job_information():
-    
     display_Jobs()
+    task_chooser = input("Please write the name of the taks you want to update it : ")
+    with open("Jobs_information.json" , "r") as updateinformation :
+         data = json.load(updateinformation)
+         for index ,  elments in enumerate(data) : 
+             for keys in elments : 
+                 if task_chooser in keys : 
+    
+                  update_taske_choose =input("what is the inormation you want to update ?\n1-Title\n2-Details\n\n")
+    if update_taske_choose == "1" : 
+        os.system("clear")
+        new_Task_name  = input("could you please enter the new title do you want to replace with older ? : ")
+        elments[f"{new_Task_name}"] = elments.pop(task_chooser)
+        with open("Jobs_information.json","w") as updateinformation : 
+            json.dump(data , updateinformation , indent=3 )
+            print("SUCCESSFULLY UPDATE TASKS INFORMATION")
+            updateinformation.close()
+    elif update_taske_choose == "2":
+        Sub_keys = []
+        for Sub_keyss in elments[keys] : 
+            for index ,  Elements in enumerate(Sub_keyss) :   
+             Sub_keys.append(Elements)
+             print(Elements+"\n")
+             specific_details = int(input("Which  specific information you want to update ? : "
+                                 +"\n"))-1
+             if Sub_keys[specific_details] :
+                new_key_value = input("please enter the new value : ")
+                Sub_keyss[Elements] = new_key_value 
+                time.sleep(1)
+                print("Sucessfully update the value ")
+                
+                with open("Jobs_information.json" , "w") as updateinformation : 
+                    json.dump(data , updateinformation , indent=3)
+                                      
+                
+            
+            
+            
+            
+         
+        
+        
+        
+                         
+                      
+                        
+                       
+                     
+                     
+           
+                    
+                    
+                    
+                
+                
+          
+    
+    
     
     
     
